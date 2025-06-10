@@ -1,16 +1,43 @@
-// Update URL hash
-// window.location.hash = sectionId;
+// Hamburger Menu Functions
+function toggleMenu() {
+    const navLinks = document.querySelector('.nav-links');
+    const hamburger = document.querySelector('.hamburger');
+    
+    navLinks.classList.toggle('active');
+    hamburger.classList.toggle('active');
+}
+
+function closeMenu() {
+    const navLinks = document.querySelector('.nav-links');
+    const hamburger = document.querySelector('.hamburger');
+    
+    navLinks.classList.remove('active');
+    hamburger.classList.remove('active');
+}
+
+// Close menu when clicking outside
+document.addEventListener('click', function(event) {
+    const navLinks = document.querySelector('.nav-links');
+    const hamburger = document.querySelector('.hamburger');
+    const nav = document.querySelector('nav');
+    
+    if (!nav.contains(event.target) && navLinks.classList.contains('active')) {
+        closeMenu();
+    }
+});
 
 function showSection(sectionId) {
-    document.querySelectorAll('.section').forEach(section => {
+    // Hide all sections
+    const sections = document.querySelectorAll('.section');
+    sections.forEach(section => {
         section.classList.remove('active');
     });
-
-    const targetSection = document.getElementById(sectionId);
-    if (targetSection) {
-        targetSection.classList.add('active');
-        window.location.hash = sectionId;
-    }
+    
+    // Show the selected section
+    document.getElementById(sectionId).classList.add('active');
+    
+    // Update URL hash
+    window.location.hash = sectionId;
 }
 
 // Show section based on URL hash on page load
